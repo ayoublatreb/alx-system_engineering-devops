@@ -1,3 +1,2 @@
 #!/bin/bash
-ls -1A | sed -e 's/$/,/' -e 's/^/"/' -e 's/\/"/\//g' | tr -d '\n' && echo
-
+ls -apm | sort -d
