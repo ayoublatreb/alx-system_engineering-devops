@@ -1,13 +1,7 @@
 #!/usr/bin/env bash
-# install nginx web server on the server
+# Installs Nginx
 
-# updated server
-sudo apt-get -y update
-
-# install ngnix web server
-sudo apt-get -y install nginx
-
-# listen to port 80
-nc -l -p 80
-echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
-sudo service nginx restart
+apt-get update
+apt-get install -y nginx
+echo "hello word" > /var/www/html/index.html
+service nginx start
