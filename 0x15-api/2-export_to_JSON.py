@@ -1,12 +1,12 @@
 #!/usr/bin/python3
 
 """
-Python script that exports data in the CSV format
+Python script that exports data in the JSON format.
 """
 
 from requests import get
 from sys import argv
-import csv
+import json
 
 if __name__ == "__main__":
     response = get('https://jsonplaceholder.typicode.com/todos/')
@@ -18,18 +18,24 @@ if __name__ == "__main__":
 
     for i in data2:
         if i['id'] == int(argv[1]):
-            employee = i['username']
+            u_name = i['username']
+            id_no = i['id']
 
-    with open(argv[1] + '.csv', 'w', newline='') as file:
-        writ = csv.writer(file, quoting=csv.QUOTE_ALL)
+    row = []
 
-        for i in data:
+    for i in data:
 
-            row = []
-            if i['userId'] == int(argv[1]):
-                row.append(i['userId'])
-                row.append(employee)
-                row.append(i['completed'])
-                row.append(i['title'])
+        new_dict = {}
 
-                writ.writerow(row)
+        if i['userId'] == int(argv[1]):
+            new_dict['username'] = u_name
+            new_dict['task'] = i['title']
+            new_dict['completed'] = i['completed']
+            row.append(new_dict)
+
+    final_dict = {}
+    final_dict[id_no] = row
+    json_obj = json.dumps(final_dict)
+
+    with open(argv[1] + ".json",  "w") as f:
+        f.write(json_obj)
