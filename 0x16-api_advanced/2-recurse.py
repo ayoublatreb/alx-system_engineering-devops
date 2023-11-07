@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """Module for task 2"""
 
-
 def recurse(subreddit, hot_list=[], count=0, after=None):
     """Queries the Reddit API and returns all hot posts
     of the subreddit"""
